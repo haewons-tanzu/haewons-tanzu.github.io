@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HTTP Session Caching with Spring Data on TAS (Tanzu Application Service)
+title: HTTP Session Caching with Spring Data on TAS
 #subtitle: Each post also has a subtitle
 gh-repo: hshin-pivotal/hshin-pivotal.github.io
 gh-badge: [star, fork, follow]
@@ -15,7 +15,7 @@ Apache Geode is a data management platform that provides real-time, consistent a
 There are 3 ways to use GemFire or Apache Geode. 
 - Apache Geode: OSS In-Memory Data Grid
 - VMware Tanzu GemFire: Commercial version of Apache Geode, VMware supports it. It can be installed on bare metal or VMs.
-- VMware Tanzu GemFire for VMs: Commercial version of Apache Geode for TAS(Tanzu Application Service, PaaS Platform)
+- VMware Tanzu GemFire for VMs: Commercial version of Apache Geode for TAS (Tanzu Application Service, PaaS Platform)
 
 
 ## HTTP Session Caching
