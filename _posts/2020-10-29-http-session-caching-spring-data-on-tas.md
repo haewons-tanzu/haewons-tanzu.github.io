@@ -145,7 +145,7 @@ Default region name for session storage is ClusteredSpringSessions in [SSDG (Spr
 
 Here, we enable GemFire session region using EnableGemFireHttpSession. If we skip this step, we'll see this error.
 
-{% highlight console wrap %}
+{% highlight console %}
 2020-10-29T08:13:31.808-07:00 [APP/PROC/WEB/0] [OUT] 2020-10-29 15:13:31.808 ERROR 25 --- [ main] o.s.b.web.embedded.tomcat.TomcatStarter : Error starting Tomcat context. Exception: org.springframework.beans.factory.UnsatisfiedDependencyException. Message: Error creating bean with name 'springSessionRepositoryFilter' defined in class path resource [org/springframework/session/data/gemfire/config/annotation/web/http/GemFireHttpSessionConfiguration.class]: Unsatisfied dependency expressed through method 'springSessionRepositoryFilter' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sessionRepository' defined in class path resource [org/springframework/session/data/gemfire/config/annotation/web/http/GemFireHttpSessionConfiguration.class]: Unsatisfied dependency expressed through method 'sessionRepository' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'ClusteredSpringSessions' defined in class path resource [org/springframework/session/data/gemfire/config/annotation/web/http/GemFireHttpSessionConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalArgumentException: [gemfirePool] is not resolvable as a Pool in the application context
 {% endhighlight %}
 
