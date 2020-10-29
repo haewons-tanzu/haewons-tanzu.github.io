@@ -40,7 +40,10 @@ Default region name for session storage is ClusteredSpringSessions in SDG (Sprin
 gfsh> gfsh> connect --use-http=true --url=http://cloudcache-8761e54e-1bc0-4855-b96c-819eda347073.xxx.xxx.io/gemfire/v1
 --use-ssl=false --skip-ssl-validation --user=cluster_operator_AvK614osQTWzysB8Pd1M4g --password=7eg52Fp8EM3eqpIXH0uRg
 ```
-If you don't have gfsh in your environment, you can install [here](2020-10-29-gemfire-installation-on-mac){:target="_blank"}. You should install GemFire with same version of "Tanzu GemFire for VMs" on TAS.
+If you don't have gfsh in your environment, you can install [here](2020-10-29-gemfire-installation-on-mac){:target="_blank"}. 
+
+{: .box-note}
+**Note:** You should install GemFire with same version of "Tanzu GemFire for VMs" on TAS.
 
 Let's create region named "ClusteredSpringSessions".
 
@@ -164,6 +167,7 @@ public class HttpSessionController {
 ```
 
 #### 6. Create manifest file (manifest.yml)
+Once configuring service here, you don't need to bind GemFire service to Spring Boot app. Enough pushing app!
 
 ```yml
 ---
@@ -175,91 +179,36 @@ applications:
 ```
 
 #### 7. Build and push
+
 ```shell
 $ ./gradlew clean assemble
 
 $ cf push
 ```
 
+#### 8. Test
 
-Implement a session API for demonstrating http session offloading. This sample API creates a session object and increments no. of page hits.
-
-https://docs.pivotal.io/p-cloud-cache/1-12/session-caching.html
-
-
-
-
-
-
-
-
-#### Step 5: Rebuild and push the app
-
-#### Step 6: session API
-
-http://pizza-store-pcc-client.apps.xyz.com/session
-
-```
-Session Id [0056EFC36B06C14619B3F14A4ED66272] 
-No. of Hits [4]
+Let's invoke app url we've pushed. 
+```url
+https://spring-session-demo.xxx.xxx.io/session
 ```
 
-
-
-
-
-
-
-
-Refered to [the link](https://github.com/Tanzu-Solutions-Engineering/PivotalCloudCache-Workshop/){:target="_blank"} for sampe codes.
-
-
-
-
-
-## Here is a secondary heading
-
-
-
-~~~
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
-~~~
-
-And here is the same code with syntax highlighting:
-
-```javascript
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
+Web page will be shown as below. When we refresh it, "No. of Hits" will be increasing.
+```text
+Session Id [604f75f7-8ec8-4607-8373-56f054f25653]
+No. of Hits [2]
 ```
 
-And here is the same code yet again but with line numbers:
+Now, we restart this app on Apps Manager, which is a console for developers in Tanzu Application Service. Just click "restart" button. If session is stored in app container itself, then session is initialized, session id will be changed and value of "No. of Hits" is 1. 
 
-{% highlight javascript linenos %}
-var foo = function(x) {
-  return(x + 5);
-}
-foo(3)
-{% endhighlight %}
+However, we stored session value in GemFire service instance, there's no affect!. That's why we use IMDG (In-Memory Data Grid). After restarting app, let's refresh the browser.
 
-## Boxes
-You can add notification, warning and error boxes like this:
+```text
+Session Id [604f75f7-8ec8-4607-8373-56f054f25653]
+No. of Hits [7]
+```
 
-### Notification
+Session is not lost. Good job!
 
-{: .box-note}
-**Note:** This is a notification box.
+Refered to [the link](https://github.com/Tanzu-Solutions-Engineering/PivotalCloudCache-Workshop/){:target="_blank"} for sampe codes and [Connecting a Spring Boot App to VMware Tanzu GemFire with Session State Caching](https://docs.pivotal.io/p-cloud-cache/1-13-beta/Spring-SessionState.html){:target="_blank"}
 
-### Warning
-
-{: .box-warning}
-**Warning:** This is a warning box.
-
-### Error
-
-{: .box-error}
-**Error:** This is an error box.
