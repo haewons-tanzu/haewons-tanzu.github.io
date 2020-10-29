@@ -26,9 +26,9 @@ $ brew tap pivotal/tap
 ~~~
 
 Install GemFire. In this case, it'll be installed GemFire with the latest version.
-~~~
+```shell
 $ brew install gemfire
-~~~
+```
 
 If you are upgrading an existing GemFire installation, execute the brew upgrade command to upgrade GemFire to the latest version:
 ~~~
