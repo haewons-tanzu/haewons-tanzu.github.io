@@ -17,11 +17,10 @@ There are 3 ways to use GemFire or Apache Geode.
 - VMware Tanzu GemFire: Commercial version of Apache Geode, VMware supports it. It can be installed on bare metal or VMs.
 - VMware Tanzu GemFire for VMs: Commercial version of Apache Geode for TAS(Tanzu Application Service, PaaS Platform)
 
+
 ## HTTP Session Caching
 
 ### Environment
-
-In this document, I'll use this environment.
 - Spring Boot 2.3.1
 - VMWare Tanzu GemFire for VMs 1.12
 - Running on TAS (Tanzu Application Service) 2.10.3
