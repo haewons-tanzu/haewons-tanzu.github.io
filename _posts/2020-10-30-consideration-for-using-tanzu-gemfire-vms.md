@@ -15,7 +15,7 @@ comments: true
 
 
 #### @EnableClusterAware
-@EnableClusterAware allows the application to seamlessly switch between local-only (application running on local machine) and client/server (application running on TAS). This annotation includes the @EnableClusterConfiguration annotation, which dynamically creates regions if they do not exist already. Note that the @EnableClusterConfiguration annotation will only create Regions, it will not delete or update existing regions.
+[@EnableClusterAware](https://docs.pivotal.io/cloud-cache-dev/spring-boot/basic-cache){:target="_blank"} allows the application to seamlessly switch between local-only (application running on local machine) and client/server (application running on TAS). This annotation includes the @EnableClusterConfiguration annotation, which dynamically creates regions if they do not exist already. Note that the @EnableClusterConfiguration annotation will only create Regions, it will not delete or update existing regions.
 
 If you are using [SBDG](https://github.com/spring-projects/spring-boot-data-geode#spring-boot-for-apache-geode--pivotal-gemfire){:target="_blank"}, then you would annotate your main Spring Boot application class with @EnableClusterAware annotation.
 
@@ -28,5 +28,4 @@ gfsh> alter region --name=ClusteredSpringSessions --entry-idle-time-expiration=1
 
 For more information, please refer as below.
 - [Disable Near Caching Within the App](https://docs.pivotal.io/p-cloud-cache/1-12/session-caching.html){:target="_blank"}
-- [@EnableClusterAware](https://docs.pivotal.io/cloud-cache-dev/spring-boot/basic-cache){:target="_blank"}
 - [@EnableClusterAware limitation](https://docs.spring.io/spring-boot-data-geode-build/1.4.x/reference/html5/#geode-session-pcc){:target="_blank"}
