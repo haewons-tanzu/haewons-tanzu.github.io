@@ -35,7 +35,12 @@ $ cf create-service p-cloudcache extra-small pcc-session-cache -t session-replic
 ```
 
 #### 2. Create a region for storing session objects.
-Default region name for session storage is ClusteredSpringSessions in SSDG (Spring Session Data Grid). We'll use gfsh (GemFire SHell) cli to create region. 
+Default region name for session storage is ClusteredSpringSessions in [SSDG (Spring Session Data Grid)](https://spring.io/projects/spring-session-data-geode){:target="_blank"}. We'll use gfsh (GemFire SHell) cli to create region. 
+
+{: .box-note}
+**Note:** Default region name for session storage is gemfire_modules_sessions in VMware Tanzu GemFire. For more its default values, please refer [here])https://gemfire.docs.pivotal.io/910/geode/tools_modules/http_session_mgmt/tomcat_changing_gf_default_cfg.html){:target="_blank"}. 
+
+
 ```shell
 gfsh> gfsh> connect --use-http=true --url=http://cloudcache-8761e54e-1bc0-4855-b96c-819eda347073.xxx.xxx.io/gemfire/v1
 --use-ssl=false --skip-ssl-validation --user=cluster_operator_AvK614osQTWzysB8Pd1M4g --password=7eg52Fp8EM3eqpIXH0uRg
