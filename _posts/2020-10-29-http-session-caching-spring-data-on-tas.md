@@ -34,33 +34,11 @@ You have to create service instance on TAS to use Tanzu GemFire service on your 
 $ cf create-service p-cloudcache extra-small pcc-session-cache -t session-replication
 ```
 
-#### 2. Create a region for storing session objects.
-Default region name for session storage is ClusteredSpringSessions in [SSDG (Spring Session Data Grid)](https://spring.io/projects/spring-session-data-geode){:target="_blank"}. We'll use gfsh (GemFire SHell) cli to create region. 
-
-{: .box-note}
-**Note:** Default region name for session storage is gemfire_modules_sessions in VMware Tanzu GemFire. For more its default values, please refer [here](https://gemfire.docs.pivotal.io/910/geode/tools_modules/http_session_mgmt/tomcat_changing_gf_default_cfg.html){:target="_blank"}. 
-
-
-```shell
-gfsh> connect --use-http=true --url=http://cloudcache-8761e54e-1bc0-4855-b96c-819eda347073.xxx.xxx.io/gemfire/v1
---use-ssl=false --skip-ssl-validation --user=cluster_operator_AvK614osQTWzysB8Pd1M4g --password=7eg52Fp8EM3eqpIXH0uRg
-```
-If you don't have gfsh in your environment, you can install [here](2020-10-29-gemfire-installation-on-mac){:target="_blank"}. 
-
-{: .box-note}
-**Note:** You should install GemFire with same version of "Tanzu GemFire for VMs" on TAS.
-
-Let's create region named "ClusteredSpringSessions".
-
-```shell
-gfsh> create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
-```
-
 ### HTTP Session Caching
 
 Now, let's prepare sample session app based Srring Boot.
 
-#### 3. gradle build file
+#### 2. gradle build file
 
 {% highlight text linenos %}
 group = 'com.vmware.tanzu.gemfire'
@@ -117,6 +95,31 @@ test {
     useJUnitPlatform()
 }
 {% endhighlight %}
+
+#### 3. Configiration to create cache region using @EnableClusterAware
+
+We set the region name here.
+
+{% highlight java linenos %}
+package com.vmware.tanzu.gemfire.session;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.geode.config.annotation.EnableClusterAware;
+
+@SpringBootApplication
+@EnableClusterAware
+public class SessionApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SessionApplication.class, args);
+    }
+
+}
+{% endhighlight %}
+
+{: .box-note}
+**Note:** This does not push Expiration policy metadata to the server, so you would need to alter the region after region is created by the Spring Boot application. For more information, please refer [here](2020-10-30-consideration-for-using-tanzu-gemfire-vms){:target="_blank"}. 
 
 #### 4. GemFire configuration file in Spring Boot App to enable session caching using @EnableGemFireHttpSession
 
@@ -181,6 +184,7 @@ applications:
     path: ./build/libs/session-0.0.1-SNAPSHOT.jar
     buildpacks: [java_buildpack_offline]
     services: [my-sessioncache]
+
 {% endhighlight %}
 
 #### 7. Build and push
