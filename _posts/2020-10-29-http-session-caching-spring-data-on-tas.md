@@ -140,7 +140,7 @@ import org.springframework.session.data.gemfire.config.annotation.web.http.Enabl
 }
 {% endhighlight %}
 
-Default region name for session storage is ClusteredSpringSessions in [SSDG (Spring Session Data Grid)](https://spring.io/projects/spring-session-data-geode){:target="_blank"}. We'll use gfsh (GemFire SHell) cli to create region. 
+Default region name for session storage is ClusteredSpringSessions in [SSDG (Spring Session Data Grid)](https://spring.io/projects/spring-session-data-geode){:target="_blank"}.
 
 {: .box-note}
 **Note:** Default region name for session storage is gemfire_modules_sessions in VMware Tanzu GemFire. For more its default values, please refer [here](https://gemfire.docs.pivotal.io/910/geode/tools_modules/http_session_mgmt/tomcat_changing_gf_default_cfg.html){:target="_blank"}. 
