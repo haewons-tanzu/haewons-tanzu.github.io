@@ -27,10 +27,12 @@ gfsh> connect --use-http=true --url=http://cloudcache-8761e54e-1bc0-4855-b96c-81
 
 gfsh> alter region --name=ClusteredSpringSessions --entry-idle-time-expiration=1800 --entry-idle-time-expiration-action=INVALIDATE
 ```
-I used gfsh (GemFire SHell) cli to alter region attributes. If you don't have gfsh in your environment, you can install [here](2020-10-29-gemfire-installation-on-mac){:target="_blank"}. 
+I used gfsh (GemFire SHell) cli to alter region attributes. If you don't have gfsh cli in your environment, you can install [here](2020-10-29-gemfire-installation-on-mac){:target="_blank"}. 
 
 {: .box-note}
 **Note:** You should install GemFire with same version of "Tanzu GemFire for VMs" on TAS.
+
+#### Data Serialization
 
 
 For more information, please refer as below.
