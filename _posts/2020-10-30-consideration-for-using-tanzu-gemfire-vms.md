@@ -15,14 +15,14 @@ comments: true
 
 
 ## @EnableClusterAware
-However, this does not push Expiration policy metadata to the server yet as that is still a WIP.
 
-So you would need to alter the region after it is created by the Spring Boot application, using:
+If you are using [SBDG](https://github.com/spring-projects/spring-boot-data-geode#spring-boot-for-apache-geode--pivotal-gemfire){:target="_blank"}, then you would annotate your main Spring Boot application class with @EnableClusterAware annotation.
+
+However, this does not push Expiration policy metadata to the server yet as that is still a WIP. So you would need to alter the region after it is created by the Spring Boot application, using:
+
 ```shell
 gfsh> alter region --name=ClusteredSpringSessions --entry-idle-time-expiration=1800 --entry-idle-time-expiration-action=INVALIDATE
 ```
-
-Again make sure to adjust the Region name if you used a different name for the Region when you specified it.
 
 
 For more information, please refer as below.
