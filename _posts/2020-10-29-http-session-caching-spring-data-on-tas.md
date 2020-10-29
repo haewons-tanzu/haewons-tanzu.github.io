@@ -29,14 +29,26 @@ In this document, I'll use this environment.
 ### Preparation
 
 #### 1. Create Tanzu GemFire service using cf cli.
-You have to create service instance on TAS to use Tanzu GemFire service on your application. We'll store session data, and need to tag "session-replication" in service instance.
+You have to create service instance on TAS to use Tanzu GemFire service on your application. We need to tag "session-replication" in service instance to store session data in GemFire.
 
 ```shell
-cf create-service p-cloudcache extra-small pcc-session-cache -t session-replication
+$ cf create-service p-cloudcache extra-small pcc-session-cache -t session-replication
 ```
 
 #### 2. Create a region for storing session objects.
-Default 
+Default region name for session storage is ClusteredSpringSessions in SDG (Spring Data Grid). We'll use gfsh (GemFire SHell) cli to create region. 
+```shell
+gfsh> gfsh> connect --use-http=true --url=http://cloudcache-8761e54e-1bc0-4855-b96c-819eda347073.xxx.xxx.io/gemfire/v1
+--use-ssl=false --skip-ssl-validation --user=cluster_operator_AvK614osQTWzysB8Pd1M4g --password=7eg52Fp8EM3eqpIXH0uRg
+```
+If you don't have gfsh in your environment, you can install [here](2020-10-29-gemfire-installation-on-mac){:target="_blank"}. You should install GemFire with same version of "Tanzu GemFire for VMs" on TAS
+
+Let's create region named "ClusteredSpringSessions".
+
+```shell
+gfsh> create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
+```
+
 
 
 Implement a session API for demonstrating http session offloading. This sample API creates a session object and increments no. of page hits.
@@ -48,9 +60,7 @@ Implement a session API for demonstrating http session offloading. This sample A
 https://docs.pivotal.io/p-cloud-cache/1-12/session-caching.html
 
 
-```
-create region --name=ClusteredSpringSessions --type=PARTITION_HEAP_LRU
-```
+
 
 #### Step 2: Update the pom.xml to include the spring-session-data-gemfire dependency
 
