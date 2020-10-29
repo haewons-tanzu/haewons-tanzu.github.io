@@ -189,7 +189,8 @@ $ cf push
 #### 8. Test
 
 Let's invoke app url we've pushed. 
-```url
+
+```text
 https://spring-session-demo.xxx.xxx.io/session
 ```
 
