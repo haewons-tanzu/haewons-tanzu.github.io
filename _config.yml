@@ -41,7 +41,8 @@ social-network-links:
 #  email: "xxx@xx.com"
   facebook: haewon.shin
   github: hshin-pivotal
-#  twitter: 
+#  
+: 
 #  reddit: yourname
 #  linkedin: daattali
 #  xing: yourname
@@ -68,7 +69,7 @@ rss-description: This website is a virtual proof that I'm awesome
 
 # Select which social network share links to show in posts
 share-links-active:
-  twitter: true
+  twitter: false
   facebook: true
   linkedin: true
   vk: false
@@ -184,7 +185,7 @@ date_format: "%B %-d, %Y"
 # --- You don't need to touch anything below here (but you can if you want) --- #
 
 # Output options (more information on Jekyll's site)
-timezone: "America/Toronto"
+timezone: "Asia/Seoul"
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
