@@ -62,7 +62,7 @@ Now, let's prepare sample session app based Srring Boot.
 
 #### 3. gradle build file
 
-```text
+{% highlight text linenos %}
 group = 'com.vmware.tanzu.gemfire'
 version = '0.0.1-SNAPSHOT'
 
@@ -116,13 +116,13 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-```
+{% endhighlight %}
 
 #### 4. GemFire configuration file in Spring Boot App to enable session caching using @EnableGemFireHttpSession
 
 We set the region name here.
 
-```java
+{% highlight java linenos %}
 package com.vmware.tanzu.gemfire.session;
 
 import org.springframework.context.annotation.Configuration;
@@ -135,11 +135,11 @@ import org.springframework.session.data.gemfire.config.annotation.web.http.Enabl
 @Configuration
   public class CloudCacheConfig {
 }
-```
+{% endhighlight %}
 
 #### 5. Implement Controller for retrieving session value
 
-```java
+{% highlight java linenos %}
 package com.vmware.tanzu.gemfire.session;
 
 import javax.servlet.http.HttpSession;
@@ -169,19 +169,19 @@ public class HttpSessionController {
     }
 
 }
-```
+{% endhighlight %}
 
 #### 6. Create manifest file (manifest.yml)
 Once configuring service here, you don't need to bind GemFire service to Spring Boot app. Enough pushing app!
 
-```yml
+{% highlight yml linenos %}
 ---
 applications:
   - name: spring-session-demo
     path: ./build/libs/session-0.0.1-SNAPSHOT.jar
     buildpacks: [java_buildpack_offline]
     services: [my-sessioncache]
-```
+{% endhighlight %}
 
 #### 7. Build and push
 
