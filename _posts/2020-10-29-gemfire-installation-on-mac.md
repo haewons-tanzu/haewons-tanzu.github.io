@@ -51,4 +51,4 @@ To delete it, you can execute as below.
 $ brew remove gemfire@9.9
 ```
 
-Please refere [here](https://gemfire.docs.pivotal.io/910/gemfire/getting_started/installation/install_brew.html) for more information.
+Please refere [here](https://gemfire.docs.pivotal.io/910/gemfire/getting_started/installation/install_brew.html){:target="_blank"} for more information.
