@@ -6,15 +6,15 @@
 # --- Required options --- #
 
 # Name of website
-title: My Website
+title: Haewon Shin @ VMware
 
 # Your name to show in the footer
-author: Some Person
+author: Haewon Shin
 
 # --- List of links in the navigation bar --- #
 
 navbar-links:
-  About Me: "aboutme"
+  LinkedIn: "https://www.linkedin.com/in/haewonshin/"
   Resources:
     - Beautiful Jekyll: "https://beautifuljekyll.com"
     - Learn markdown: "https://www.markdowntutorial.com/"
