@@ -15,10 +15,12 @@ author: Haewon Shin
 
 navbar-links:
   LinkedIn: "https://www.linkedin.com/in/haewonshin/"
-  Seminars:
-    - Beautiful Jekyll: "https://beautifuljekyll.com"
-    - Learn markdown: "https://www.markdowntutorial.com/"
-  Workshops: "https://deanattali.com"
+  Seminars: seminars.html
+#  Seminars:
+#    - Beautiful Jekyll: "https://beautifuljekyll.com"
+#    - Learn markdown: "https://www.markdowntutorial.com/"
+#  Workshops: "https://deanattali.com"
+#  Books:
 
 # --- Logo --- #
 
