@@ -35,12 +35,12 @@ If you are upgrading an existing GemFire installation, execute the brew upgrade 
 $ brew upgrade gemfire
 ~~~
 
-Configure your JAVA_HOME environment variable to point to a supported version of Java (listed in Host Machine Requirements). For example, .zshrc, .bash_profile:
+Configure your JAVA_HOME environment variable to point to a supported version of Java in your environment variable file like .zshrc, .bash_profile.
 ~~~
 JAVA_HOME='/usr/libexec/java_home -v  1.8'
 ~~~
 
-## In case of specific version's installation
+## In case of specific version
 You can execute below command to install.
 ~~~
 $ brew install gemfire@9.9
