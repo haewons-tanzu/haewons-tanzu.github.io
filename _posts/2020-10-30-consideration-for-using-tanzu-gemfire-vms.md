@@ -22,8 +22,15 @@ If you are using [SBDG](https://github.com/spring-projects/spring-boot-data-geod
 However, this does not push Expiration policy metadata to the server yet as that is still a WIP. So you would need to alter the region after it is created by the Spring Boot application, using:
 
 ```shell
+gfsh> connect --use-http=true --url=http://cloudcache-8761e54e-1bc0-4855-b96c-819eda347073.xxx.xxx.io/gemfire/v1
+--use-ssl=false --skip-ssl-validation --user=cluster_operator_AvK614osQTWzysB8Pd1M4g --password=7eg52Fp8EM3eqpIXH0uRg
+
 gfsh> alter region --name=ClusteredSpringSessions --entry-idle-time-expiration=1800 --entry-idle-time-expiration-action=INVALIDATE
 ```
+If you don't have gfsh in your environment, you can install [here](2020-10-29-gemfire-installation-on-mac){:target="_blank"}. 
+
+{: .box-note}
+**Note:** You should install GemFire with same version of "Tanzu GemFire for VMs" on TAS.
 
 
 For more information, please refer as below.
