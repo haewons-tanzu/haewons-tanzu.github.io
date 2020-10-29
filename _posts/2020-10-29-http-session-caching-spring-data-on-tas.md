@@ -210,5 +210,5 @@ No. of Hits [7]
 
 Session is not lost. Good job!
 
-Refered to [the link](https://github.com/Tanzu-Solutions-Engineering/PivotalCloudCache-Workshop/){:target="_blank"} for sampe codes and document for Connecting a Spring Boot App to VMware Tanzu GemFire with Session State Caching](https://docs.pivotal.io/p-cloud-cache/1-13-beta/Spring-SessionState.html){:target="_blank"}
+Refered to [the link](https://github.com/Tanzu-Solutions-Engineering/PivotalCloudCache-Workshop/){:target="_blank"} for sampe codes and document for [Connecting a Spring Boot App to VMware Tanzu GemFire with Session State Caching](https://docs.pivotal.io/p-cloud-cache/1-13-beta/Spring-SessionState.html){:target="_blank"}
 
