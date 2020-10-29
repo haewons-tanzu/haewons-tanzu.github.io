@@ -42,7 +42,7 @@ Default region name for session storage is ClusteredSpringSessions in [SSDG (Spr
 
 
 ```shell
-gfsh> gfsh> connect --use-http=true --url=http://cloudcache-8761e54e-1bc0-4855-b96c-819eda347073.xxx.xxx.io/gemfire/v1
+gfsh> connect --use-http=true --url=http://cloudcache-8761e54e-1bc0-4855-b96c-819eda347073.xxx.xxx.io/gemfire/v1
 --use-ssl=false --skip-ssl-validation --user=cluster_operator_AvK614osQTWzysB8Pd1M4g --password=7eg52Fp8EM3eqpIXH0uRg
 ```
 If you don't have gfsh in your environment, you can install [here](2020-10-29-gemfire-installation-on-mac){:target="_blank"}. 
