@@ -8,6 +8,11 @@ My name is Inigo Montoya. I have the following qualities:
 
 - I rock a great mustache
 - I'm extremely loyal to my family
+
+
+
+[allshowTV - VMware Tanzu] 쿠버네티스, 어디까지 가봤니?
+
 - [쿠버네티스가 vSphere를 만났을 때](https://www.youtube.com/watch?v=LFuXnfMo6is)
 
 What else do you need?
