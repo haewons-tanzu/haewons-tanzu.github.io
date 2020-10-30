@@ -17,7 +17,7 @@ comments: true
 #### @EnableClusterAware
 [@EnableClusterAware](https://docs.pivotal.io/cloud-cache-dev/spring-boot/basic-cache){:target="_blank"} allows the application to seamlessly switch between local-only (application running on local machine) and client/server (application running on TAS). This annotation includes the @EnableClusterConfiguration annotation, which dynamically creates regions if they do not exist already. Note that the @EnableClusterConfiguration annotation will only create Regions, it will not delete or update existing regions.
 
-If you are using [SBDG](https://github.com/spring-projects/spring-boot-data-geode#spring-boot-for-apache-geode--pivotal-gemfire){:target="_blank"}, then you would annotate your main Spring Boot application class with @EnableClusterAware annotation.
+If you are using [SBDG/SSDG](https://github.com/spring-projects/spring-boot-data-geode#spring-boot-for-apache-geode--pivotal-gemfire){:target="_blank"}, then you would annotate your main Spring Boot application class with @EnableClusterAware annotation.
 
 However, this does not push Expiration policy metadata to the server yet as that is still a WIP. So you would need to alter the region after it is created by the Spring Boot application, using:
 
