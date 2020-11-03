@@ -81,3 +81,5 @@ No. of Hits [3]
 ```
 
 Session is not lost. Good job!
+
+For more information about Spring Cloud Gateway for VMware Tanzu, please refer [here](https://docs.pivotal.io/spring-cloud-gateway/1-0/){:target="_blank"}.
