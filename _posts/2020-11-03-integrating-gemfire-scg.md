@@ -27,13 +27,15 @@ $ cf create-service p.gateway standard my-gateway -c '{ "host": "my-gateway", "d
 Once it is created successfully, it should have dashboard with link "https://my-gateway.cfapps.haas-xxx.pez.pivotal.io/scg-dashboard".
 
 {: .box-error}
-**Error:** If you met the error with "<b>Service broker error: env cannot be null</b>" using Spring Cloud Gateway for VMware Tanzu 1.0.11, please check environment values in your app. In this case, you can add mock value in Apps Manager > Application Info > Settings > User Provided Environment Variables. (For example, Key=APP_NAME, Value=app1) And then, you can try to bind application again. It will work. It seems bug. :(
-+
+**Error:** If you met the error with "<b>Service broker error: env cannot be null</b>" using Spring Cloud Gateway for VMware Tanzu 1.0.11, please check environment values in your app. It seems bug. :(
+
 You can check it with cf cli as below:
-+
 ```shell
 $ cf curl /v2/apps/$(cf app app1 --guid)/summary | jq -r .environment_json
 ```
+
+In this case, you can add mock value in Apps Manager > Application Info > Settings > User Provided Environment Variables. (For example, Key=APP_NAME, Value=app1) And then, you can try to bind application again. It will work. 
+
 
 ### 2. Deploy applications
 
