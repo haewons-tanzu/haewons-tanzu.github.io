@@ -28,12 +28,12 @@ Once it is created successfully, it should have dashboard with link "https://my-
 
 {: .box-error}
 **Error:** If you met the error with "<b>Service broker error: env cannot be null</b>" using Service broker error: env cannot be null, please check environment values in your app. In this case, you can add mock value in Apps Manager > Application Info > Settings > User Provided Environment Variables. (For example, Key=APP_NAME, Value=app1) And then, you can try to bind application again. It will work. It seems bug. :(
++
 You can check it with cf cli as below:
++
 ```shell
 $ cf curl /v2/apps/$(cf app app1 --guid)/summary | jq -r .environment_json
 ```
-
-This does not push Expiration policy metadata to the server, so you would need to alter the region after region is created by the Spring Boot application. For more information, please refer [here](2020-10-30-consideration-for-using-tanzu-gemfire-vms){:target="_blank"}. 
 
 ### 2. Deploy applications
 
