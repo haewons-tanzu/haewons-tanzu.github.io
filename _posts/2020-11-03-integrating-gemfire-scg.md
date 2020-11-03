@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HTTP Session Caching with Spring Data on TAS
+title: Integrating SCG with HTTP Session Caching with Spring Data on TAS
 #subtitle: Each post also has a subtitle
 gh-repo: hshin-pivotal/hshin-pivotal.github.io
 gh-badge: [star, fork, follow]
