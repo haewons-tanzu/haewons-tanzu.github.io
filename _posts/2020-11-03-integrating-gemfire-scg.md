@@ -8,26 +8,25 @@ tags: [Architect, GemFire, SCG]
 comments: true
 ---
 
-## Used Test Code
-
-For used test code, please refer this [doc](https://hshin-pivotal.github.io/2020-10-29-http-session-caching-spring-data-on-tas/){:target="_blank"}.
-
-### Environment
+## Environment
+- Used test code [here](/2020-10-29-http-session-caching-spring-data-on-tas/){:target="_blank"}.
 - Spring Boot 2.3.1
 - VMWare Tanzu GemFire for VMs 1.12
 - Spring Cloud Gateway for VMware Tanzu 1.0.11
 - Running on TAS (Tanzu Application Service) 2.10.3
 
-### Preparation
+## Preparation
 
-#### 1. Create Tanzu GemFire service using cf cli.
-You have to create service instance on TAS to use Tanzu GemFire service on your application. We need to tag "session-replication" in service instance to store session data in GemFire.
+#### 1. Create Spring Cloud Gateway for VMware Tanzu service using cf cli or Apps Manager.
+You have to create service instance on TAS to use Spring Cloud Gateway for VMware Tanzu on your application. If you use cf cli, execute as below:
 
 ```shell
-$ cf create-service p-cloudcache extra-small pcc-session-cache -t session-replication
+$ cf create-service p.gateway standard my-gateway -c '{ "host": "my-gateway", "domain": "cfapps.haas-xxx.pez.pivotal.io" }'
 ```
 
-### HTTP Session Caching
+### 2. Deploy applications
+
+For testing, we need 2 applications. We'll use applications with 
 
 Now, let's prepare sample session app based Srring Boot.
 
