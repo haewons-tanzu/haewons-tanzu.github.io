@@ -12,7 +12,7 @@ comments: true
 - Used sample code [here](https://github.com/hshin-pivotal/ssdg-gemfire-demo){:target="_blank"}.
 - Spring Boot 2.3.1
 - VMWare Tanzu GemFire for VMs 1.12
-- c
+- Spring Cloud Gateway for VMware Tanzu 1.0.11
 - Running on TAS (Tanzu Application Service) 2.10.3
 
 ## Preparation
@@ -27,7 +27,7 @@ $ cf create-service p.gateway standard my-gateway -c '{ "host": "my-gateway", "d
 Once it is created successfully, it should have dashboard with link "https://my-gateway.cfapps.haas-xxx.pez.pivotal.io/scg-dashboard".
 
 {: .box-error}
-**Error:** If you met the error with "<b>Service broker error: env cannot be null</b>" using Service broker error: env cannot be null, please check environment values in your app. In this case, you can add mock value in Apps Manager > Application Info > Settings > User Provided Environment Variables. (For example, Key=APP_NAME, Value=app1) And then, you can try to bind application again. It will work. It seems bug. :(
+**Error:** If you met the error with "<b>Service broker error: env cannot be null</b>" using Spring Cloud Gateway for VMware Tanzu 1.0.11, please check environment values in your app. In this case, you can add mock value in Apps Manager > Application Info > Settings > User Provided Environment Variables. (For example, Key=APP_NAME, Value=app1) And then, you can try to bind application again. It will work. It seems bug. :(
 +
 You can check it with cf cli as below:
 +
