@@ -90,5 +90,6 @@ No. of Hits [3]
 \
 
 For more information about Spring Cloud Gateway for VMware Tanzu, please refer as below:
+- https://dev.to/silviobuss/resilience-for-java-microservices-circuit-breaker-with-resilience4j-5c81
 - https://docs.google.com/document/d/1EEv4JgTtBcXPri3lpBai4G1yjt2XXtgOXl7EqJlB_wk
 - [Using Metric Store](https://docs.pivotal.io/metric-store/1-4/using.html){:target="_blank"}.
