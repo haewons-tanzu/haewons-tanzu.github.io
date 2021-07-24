@@ -33,8 +33,10 @@ share:
 urls:
     - text: About Me
       url: /about/
-    - text: My Projects
-      url: /projects/
+    - text: My Public Seminar
+      url: /seminars.md
+    #- text: My Projects
+    #  url: /projects/
     - text: XML Feed
       url: /feed.xml
 
