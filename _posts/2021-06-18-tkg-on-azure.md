@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Integrating SCG with HTTP Session Caching with Spring Data on TAS
+title: TKG Installation on Azure Environment which doesn't support multi AZ
 categories: [Architect, GemFire, SCG]
 ---
 

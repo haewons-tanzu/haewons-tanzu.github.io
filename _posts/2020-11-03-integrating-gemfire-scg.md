@@ -13,7 +13,7 @@ categories: [Architect, GemFire, SCG]
 
 ## Preparation
 
-### 1. Create Spring Cloud Gateway for VMware Tanzu service instance using cf cli or Apps Manager.
+#### 1. Create Spring Cloud Gateway for VMware Tanzu service instance using cf cli or Apps Manager.
 You have to create service instance on TAS to use Spring Cloud Gateway for VMware Tanzu on your application. If you use cf cli, execute as below:
 
 ```shell
@@ -22,7 +22,6 @@ $ cf create-service p.gateway standard my-gateway -c '{ "host": "my-gateway", "d
 
 Once it is created successfully, it should have dashboard with link "https://my-gateway.cfapps.haas-xxx.pez.pivotal.io/scg-dashboard".
 
-{: .box-error}
 **Error:** If you met the error with "<b>Service broker error: env cannot be null</b>" using Spring Cloud Gateway for VMware Tanzu 1.0.11, please check environment values in your app. It seems bug. :(
 
 You can check it with cf cli as below:
@@ -33,7 +32,7 @@ $ cf curl /v2/apps/$(cf app app1 --guid)/summary | jq -r .environment_json
 In this case, you can add mock value in Apps Manager > Application Info > Settings > User Provided Environment Variables. (For example, Key=APP_NAME, Value=app1) And then, you can try to bind application again. It will work. 
 
 
-### 2. Deploy applications
+#### 2. Deploy applications
 
 For testing, we need 2 applications. We'll use sample code in Environment section. Build the source code and deploy 2 applications with different names.
 ```shell
@@ -41,11 +40,11 @@ $ cf push app1
 $ cf push app2
 ```
 
-### 3. Create VMWare Tanzu GemFire service service instance using cf cli for session sharing.
+#### 3. Create VMWare Tanzu GemFire service service instance using cf cli for session sharing.
 
 You can refer [here](/2020-10-29-http-session-caching-spring-data-on-tas/){:target="_blank"} to create GemFire service instance.
 
-### 4. Bind SCG service instance to 2 applications separately.
+#### 4. Bind SCG service instance to 2 applications separately.
 
 By HttpSessionController class in the source code, it has context path "/session". When we deploy 2 different applications with same source, url would be as below.
 - https://app1.cfapps.haas-xxx.pez.pivotal.io/session

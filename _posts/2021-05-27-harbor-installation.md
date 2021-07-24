@@ -1,80 +1,139 @@
 ---
 layout: post
-title: Harbor Installation for Air-Gapped Environment
-categories: [TKG, Harbor]
+title: Setting up Harbor for installing TKG on Air-Gapped Environment
+categories: [TKG, Harbor, Docker]
 ---
 
 ## Environment
+- Docker: 20.10.2
+- Docmer Compose: 1.29.2
 - Harbor: Spring Boot 2.3.1
-- VMWare Tanzu GemFire for VMs 1.12
-- Spring Cloud Gateway for VMware Tanzu 1.0.11
-- Running on TAS (Tanzu Application Service) 2.10.3
+- VMWare Tanzu Kubernetes Grid 1.3.1
+- OS: Ubuntu 18.04.5 LTS
+
+## Goal
+A private registry is required to install TKG in an air-gapped environment. This is written to use the Harbor as a 
+private registry for installing TKG in an air-gapped environment.
 
 ## Preparation
+Before installing Harbor, we need to install Docker and Docker Compose.
 
-### 1. Create Spring Cloud Gateway for VMware Tanzu service instance using cf cli or Apps Manager.
-You have to create service instance on TAS to use Spring Cloud Gateway for VMware Tanzu on your application. If you use cf cli, execute as below:
+#### 1. Installing Docker
+```shell
+$ sudo apt install docker.io
+```
+For more information, please refer this [link](https://docs.docker.com/engine/install/ubuntu/).
+
+#### 2. Installing Docker Compose
+I installed Docker Compose version 1.29.2, but you can change this version as you wish.
+```shell
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose 
+$ sudo chmod +x /usr/local/bin/docker-compose 
+```
+
+#### 3. Grant authorization for current user
+```shell
+$ sudo groupadd docker 
+$ sudo usermod -aG docker $USER 
+$ newgrp docker 
+```
+
+## Harbor Installation
+
+#### 1. Download Harbor Distribution
+You can download harbor release [here](https://github.com/goharbor/harbor/releases).
 
 ```shell
-$ cf create-service p.gateway standard my-gateway -c '{ "host": "my-gateway", "domain": "cfapps.haas-xxx.pez.pivotal.io" }'
+$ tar -xvzf harbor-offline-installer-v2.2.3.tgz 
 ```
 
-Once it is created successfully, it should have dashboard with link "https://my-gateway.cfapps.haas-xxx.pez.pivotal.io/scg-dashboard".
-
-{: .box-error}
-**Error:** If you met the error with "<b>Service broker error: env cannot be null</b>" using Spring Cloud Gateway for VMware Tanzu 1.0.11, please check environment values in your app. It seems bug. :(
-
-You can check it with cf cli as below:
+You can see harbor directory.
 ```shell
-$ cf curl /v2/apps/$(cf app app1 --guid)/summary | jq -r .environment_json
+$ cd harbor
 ```
 
-In this case, you can add mock value in Apps Manager > Application Info > Settings > User Provided Environment Variables. (For example, Key=APP_NAME, Value=app1) And then, you can try to bind application again. It will work. 
-
-
-### 2. Deploy applications
-
-For testing, we need 2 applications. We'll use sample code in Environment section. Build the source code and deploy 2 applications with different names.
+#### 2. Generating certificates for Harbor
+We'll use Harbor hostname with IP address, not FQDN.\Please check your current VM's IP.
 ```shell
-$ cf push app1
-$ cf push app2
+$ ip addr
 ```
 
-### 3. Create VMWare Tanzu GemFire service service instance using cf cli for session sharing.
+Generate certificates in your harbor directory.
+```shell
+$ rm -rf ca.* server.* v3.ext 
+$ sudo docker-compose down 
 
-You can refer [here](/2020-10-29-http-session-caching-spring-data-on-tas/){:target="_blank"} to create GemFire service instance.
+$ openssl genrsa -out ca.key 4096 
+$ touch ~/.rnd 
+$ openssl req -x509 -new -nodes -sha512 -days 3650 -subj "/C=US/ST=CA/L=Palo Alto/O=VMware/OU=MAPBU/CN=10.0.0.4" -key ca.key -out ca.crt 
 
-### 4. Bind SCG service instance to 2 applications separately.
-
-By HttpSessionController class in the source code, it has context path "/session". When we deploy 2 different applications with same source, url would be as below.
-- https://app1.cfapps.haas-xxx.pez.pivotal.io/session
-- https://app2.cfapps.haas-xxx.pez.pivotal.io/session
+$ openssl genrsa -out server.key 4096 
+$ openssl req -sha512 -new -subj "/C=US/ST=CA/L=Palo Alto/O=VMware/OU=MAPBU/CN=10.0.0.4" -key server.key -out server.csr 
+```
 
 ```shell
-$ cf bind-service app1 my-gateway -c '{ "routes":[ {"path":"/app1/**", "uri":"https://app1.cfapps.haas-xxx.pez.pivotal.io" } ] }'
-$ cf bind-service app2 my-gateway -c '{ "routes":[ {"path":"/app2/**", "uri":"https://app2.cfapps.haas-xxx.pez.pivotal.io" } ] }'
+$ cat > v3.ext <<EOF
+authorityKeyIdentifier=keyid,issuer 
+basicConstraints=CA:FALSE 
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment 
+extendedKeyUsage = serverAuth 
+subjectAltName = @alt_names 
+
+[alt_names] 
+IP.1=10.0.0.4 
+EOF
 ```
 
-After binding applications, you should restage these applications.
 ```shell
-$ cf restage app1
-$ cf restage app2
+$ openssl x509 -req -sha512 -days 3650 -extfile v3.ext -CA ca.crt -CAkey ca.key -CAcreateserial -in server.csr -out server.crt 
+$ sudo mkdir -p /data/cert 
+$ sudo cp server.crt server.key /data/cert/ 
+$ openssl x509 -inform PEM -in server.crt -out server.cert 
+
+$ sudo mkdir -p /etc/docker/certs.d/10.0.0.4 
+$ sudo cp server.cert /etc/docker/certs.d/10.0.0.4/ 
+$ sudo cp server.cert /etc/docker/certs.d/10.0.0.4/server.crt 
+$ sudo cp server.key /etc/docker/certs.d/10.0.0.4/ 
+$ sudo cp ca.crt /etc/docker/certs.d/10.0.0.4/ 
+
+$ sudo mkdir -p /data/ca_download 
+$ sudo cp ca.crt /data/ca_download 
+
+$ sudo /usr/bin/c_rehash /data/cert/ 
+$ sudo systemctl restart docker 
 ```
 
-Now, we can access these 2 applications via SCG (Spring Cloud Gateway).
-- https://my-gateway.cfapps.haas-xxx.pez.pivotal.io/app1/session
-- https://my-gateway.cfapps.haas-xxx.pez.pivotal.io/app2/session
+#### 3. Configuring Harbor configuration
+Copy harbor.yml from template file and modify as below.
+The point is to change hostname and certificate location with your environment. In my environment, I have 10.0.0.4 
+as IP address.
 
+```yaml
+hostname: 10.0.0.4
 
-## Test
+# http related config
+http:
+  # port for http, default is 80. If https enabled, this port will redirect to https port
+  port: 80
 
-Test is simple. We just invoke 2 applications with the link via SCG, refresh it and check if sessions are kept. "No. of Hits" will be increasing.
-
-```text
-Session Id [40cc2617-5c40-4072-8e9c-b6c3373f87d8]
-No. of Hits [3]
+# https related config
+https:
+  # https port for harbor, default is 443
+  port: 443
+  # The path of cert and key files for nginx
+  certificate: /etc/docker/certs.d/10.0.0.4/server.crt
+  private_key: /etc/docker/certs.d/10.0.0.4/server.key
 ```
 
-Session is not lost. Good job!
+#### 4. Installing Harbor
+Execute as shell script in harbor directory.
+```shell
+$ sudo ./install.sh
+```
 
-For more information about Spring Cloud Gateway for VMware Tanzu, please refer [here](https://docs.pivotal.io/spring-cloud-gateway/1-0/){:target="_blank"}.
+#### 5. Check if Harbor is running
+```shell
+$ docker ps
+```
+
+All done. Let's install TKG. :)

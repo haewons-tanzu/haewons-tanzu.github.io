@@ -8,8 +8,6 @@ categories: [Architect, GemFire]
 
 #### Disabling near cache
 
-
-
 #### @EnableClusterAware
 [@EnableClusterAware](https://docs.pivotal.io/cloud-cache-dev/spring-boot/basic-cache){:target="_blank"} allows the application to seamlessly switch between local-only (application running on local machine) and client/server (application running on TAS). This annotation includes the @EnableClusterConfiguration annotation, which dynamically creates regions if they do not exist already. Note that the @EnableClusterConfiguration annotation will only create Regions, it will not delete or update existing regions.
 
@@ -25,7 +23,6 @@ gfsh> alter region --name=ClusteredSpringSessions --entry-idle-time-expiration=1
 ```
 I used gfsh (GemFire SHell) cli to alter region attributes. If you don't have gfsh cli in your environment, you can install [here](2020-10-29-gemfire-installation-on-mac){:target="_blank"}. 
 
-{: .box-note}
 **Note:** You should install GemFire with same version of "Tanzu GemFire for VMs" on TAS.
 
 #### Data Serialization

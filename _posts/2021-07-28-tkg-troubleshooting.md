@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Integrating SCG with HTTP Session Caching with Spring Data on TAS
-categories: [Architect, GemFire, SCG]
+title: TKG Troubleshooting Guide
+categories: [TKG]
 ---
 
 ## Environment
