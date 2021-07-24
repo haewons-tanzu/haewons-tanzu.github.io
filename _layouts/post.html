@@ -1,82 +1,73 @@
 ---
-layout: base
+layout: default
 ---
+<header class="post-header">
+  <h1 class="post-title">{{ page.title }}</h1>
+</header>
 
-{% include header.html type="post" %}
+<span class="time">{{ page.date | date_to_string }}</span>
+{% if page.categories %}
+  <span class="categories">
+    &raquo; {% for category in page.categories %}<a href="/category/{{ category }}">{{ category }}</a>{% if forloop.last == false %}, {% endif %}{% endfor %}
+  </span>
+{% endif %}
 
-<div class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
-  <div class="row">
-    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
+<div class="content">
+  <div class="post">{{ content }}</div>
+  {% include share-page.html %}
+</div>
 
-      {% if page.gh-repo %}
-        {% assign gh_split =  page.gh-repo | split:'/'  %}
-        {% assign gh_user =  gh_split[0]  %}
-        {% assign gh_repo =  gh_split[1]  %}
-
-        <div id="header-gh-btns">
-          {% if page.gh-badge.size > 0 %}
-            {% for badge in page.gh-badge %}
-              {% case badge %}
-                {% when 'star'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
-                {% when 'watch'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=watch&v=2&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
-                {% when 'fork'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=fork&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
-                {% when 'follow'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&type=follow&count=true" frameborder="0" scrolling="0" width="220px" height="20px"></iframe>
-              {% endcase %}
-            {% endfor %}
-          {% endif %}
-        </div>
-      {% endif %}
-
-      {% if page.before-content %}
-        <div class="before-content">
-          {% for file in page.before-content %}
-            {% include {{ file }} %}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      <article role="main" class="blog-post">
-        {{ content }}
-      </article>
-
-      {% if page.tags.size > 0 %}
-        <div class="blog-tags">
-          <span>Tags:</span>
-          {% for tag in page.tags %}
-            <a href="{{ '/tags' | relative_url }}#{{- tag -}}">{{- tag -}}</a>
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      {% if page.after-content %}
-        <div class="after-content">
-          {% for file in page.after-content %}
-            {% include {{ file }} %}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      {% if page.social-share %}
-        {% include social-share.html %}
-      {% endif %}
-
-      <ul class="pagination blog-pager">
-        {% if page.previous.url %}
-        <li class="page-item previous">
-          <a class="page-link" href="{{ page.previous.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
-        </li>
+{% assign hasSimilar = '' %}
+  {% for post in site.posts  %}
+    {% assign postHasSimilar = false %}
+      {% for tag in post.categories %}
+        {% for thisTag in page.categories %}
+          {% if postHasSimilar == false and hasSimilar.size < 6 and post != page and tag == thisTag %}
+            {% if hasSimilar.size == 0 %}
+            <div class="panel-body">
+              <h4>Related Posts</h4>
+              <ul>
+            {% endif %}
+                <li class="relatedPost">
+                  <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+                  {% if post.categories %}
+                    (Categories: {% for category in post.categories %}<a href="/category/{{ category }}">{{ category }}</a>{% if forloop.last == false %}, {% endif %}{% endfor %})
+                  {% endif %}
+                </li>
+          {% capture hasSimilar %}{{ hasSimilar }}*{% endcapture %}
+          {% assign postHasSimilar = true %}
         {% endif %}
-        {% if page.next.url %}
-        <li class="page-item next">
-          <a class="page-link" href="{{ page.next.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
-        </li>
-        {% endif %}
-      </ul>
-      {% include comments.html %}
-    </div>
-  </div>
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
+  {% if hasSimilar.size > 0 %}
+  </ul>
+</div>
+{% endif %}
+
+<div class="PageNavigation">
+  {% if page.previous.url %}
+    <a class="prev" href="{{ page.previous.url }}">&laquo; {{ page.previous.title }}</a>
+  {% endif %}
+  {% if page.next.url %}
+    <a class="next" href="{{ page.next.url }}">{{ page.next.title }} &raquo;</a>
+  {% endif %}
+</div>
+
+<div class="disqus-comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var disqus_shortname = "{{ site.disqus_shortname }}";
+    var disqus_identifier = "{{ site.url }}_{{ page.title }}";
+    var disqus_title = "{{ page.title }}";
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    /* ]]> */
+  </script>
 </div>
