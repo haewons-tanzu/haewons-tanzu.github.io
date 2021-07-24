@@ -1,15 +1,12 @@
 ---
 layout: post
 title: TKG Troubleshooting Guide
-categories: [TKG]
+categories: [TKG, Troubleshooting]
 ---
 
 ## Environment
-- Used sample code [here](https://github.com/hshin-pivotal/ssdg-gemfire-demo){:target="_blank"}.
-- Spring Boot 2.3.1
-- VMWare Tanzu GemFire for VMs 1.12
-- Spring Cloud Gateway for VMware Tanzu 1.0.11
-- Running on TAS (Tanzu Application Service) 2.10.3
+- VMWare Tanzu Kubernetes Grid 1.3.1
+- Azure Cloud
 
 ## Preparation
 
