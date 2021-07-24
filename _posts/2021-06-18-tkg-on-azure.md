@@ -11,8 +11,7 @@ categories: [TKG, Azure, Troubleshooting]
 I was trying to install TKG in Azure Region Korea Central. Basically, TKG support High Availability, and needs multi AZ
 environment. Thus, it doesn't show Korea Central in the region list in TKG UI.
 
-This feature is planned to support in 2021, but currently not supported yet. Please refer "Availability Zones presence" in [this]
-(https://azure.microsoft.com/en-us/global-infrastructure/geographies/#geographies).
+This feature is planned to support in 2021, but currently not supported yet. Please refer "Availability Zones presence" in [this](https://azure.microsoft.com/en-us/global-infrastructure/geographies/#geographies).
 
 Though you change the value AZURE_LOCATION to Korea Central in the editor after you configured in installation UI, you will see InvalidAvailabilityZone error during installation of management cluster.
 ```text
