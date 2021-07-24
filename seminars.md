@@ -1,10 +1,12 @@
 ---
 layout: page
 title: Seminars
-subtitle: Seminars what I've delivered
+permalink: /about/
 ---
 
 ### Seminar List
+
+subtitle: Seminars what I've delivered
 
 Time | Event | Title
 August 4, 2020 | AllShowTV | [VMware Tanzu: 쿠버네티스, 어디까지 가봤니? 부제: 쿠버네티스가 vSphere를 만났을 때](https://www.youtube.com/watch?v=LFuXnfMo6is)
