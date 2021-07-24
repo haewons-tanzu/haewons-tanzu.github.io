@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Seminars
-permalink: /about/
+permalink: /seminars/
 ---
 
 ### Seminars what I've delivered
