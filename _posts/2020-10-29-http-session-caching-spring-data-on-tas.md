@@ -36,7 +36,7 @@ Now, let's prepare sample session app based Srring Boot.
 
 #### 2. gradle build file
 
-{% highlight text linenos %}
+```build
 group = 'com.vmware.tanzu.gemfire'
 version = '0.0.1-SNAPSHOT'
 
@@ -90,13 +90,13 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-{% endhighlight %}
+```
 
 #### 3. Configiration to create cache region using @EnableClusterAware
 
 We set the region name here.
 
-{% highlight java linenos %}
+```java
 package com.vmware.tanzu.gemfire.session;
 
 import org.springframework.boot.SpringApplication;
@@ -112,14 +112,13 @@ public class SessionApplication {
     }
 
 }
-{% endhighlight %}
+```
 
-{: .box-note}
 **Note:** This does not push Expiration policy metadata to the server, so you would need to alter the region after region is created by the Spring Boot application. For more information, please refer [here](2020-10-30-consideration-for-using-tanzu-gemfire-vms){:target="_blank"}. 
 
 #### 4. GemFire configuration file in Spring Boot App to enable session caching using @EnableGemFireHttpSession
 
-{% highlight java linenos %}
+```java
 package com.vmware.tanzu.gemfire.session;
 
 import org.springframework.context.annotation.Configuration;
@@ -132,11 +131,10 @@ import org.springframework.session.data.gemfire.config.annotation.web.http.Enabl
 @Configuration
   public class CloudCacheConfig {
 }
-{% endhighlight %}
+```
 
 Default region name for session storage is ClusteredSpringSessions in [SSDG (Spring Session Data Grid)](https://spring.io/projects/spring-session-data-geode){:target="_blank"}.
 
-{: .box-note}
 **Note:** Default region name for session storage is gemfire_modules_sessions in VMware Tanzu GemFire. For more its default values, please refer [here](https://gemfire.docs.pivotal.io/910/geode/tools_modules/http_session_mgmt/tomcat_changing_gf_default_cfg.html){:target="_blank"}. 
 
 Here, we enable GemFire session region using EnableGemFireHttpSession. If we skip this step, we'll see this error.
@@ -147,7 +145,7 @@ Here, we enable GemFire session region using EnableGemFireHttpSession. If we ski
 
 #### 5. Implement Controller for retrieving session value
 
-{% highlight java linenos %}
+```java
 package com.vmware.tanzu.gemfire.session;
 
 import javax.servlet.http.HttpSession;
@@ -177,20 +175,19 @@ public class HttpSessionController {
     }
 
 }
-{% endhighlight %}
+```
 
 #### 6. Create manifest file (manifest.yml)
 Once configuring service here, you don't need to bind GemFire service to Spring Boot app. Enough pushing app!
 
-{% highlight yml linenos %}
+```properties
 ---
 applications:
   - name: spring-session-demo
     path: ./build/libs/session-0.0.1-SNAPSHOT.jar
     buildpacks: [java_buildpack_offline]
     services: [my-sessioncache]
-
-{% endhighlight %}
+```
 
 #### 7. Build and push
 
