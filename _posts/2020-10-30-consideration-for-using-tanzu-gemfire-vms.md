@@ -1,11 +1,7 @@
 ---
 layout: post
 title: Consideration for using "Tanzu GemFire for VMs" as session storage
-#subtitle: Each post also has a subtitle
-gh-repo: hshin-pivotal/hshin-pivotal.github.io
-gh-badge: [star, fork, follow]
-tags: [Architect, GemFire]
-comments: true
+categories: [Architect, GemFire]
 ---
 
 "Tanzu GemFire for VMs" is a good solution for storing session data on top of TAS (Tanzu Application Service), but there are some consideration to use it. 

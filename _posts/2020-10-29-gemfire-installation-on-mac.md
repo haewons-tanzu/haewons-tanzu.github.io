@@ -1,14 +1,7 @@
 ---
 layout: post
-title: GemFire Installation on Mac
-#subtitle: Excerpt from Soulshaping by Jeff Brown
-gh-repo: hshin-pivotal/hshin-pivotal.github.io
-gh-badge: [star, fork, follow]
-#cover-img: /assets/img/path.jpg
-#thumbnail-img: /assets/img/thumb.png
-#share-img: /assets/img/path.jpg
-tags: [Architect, GemFire]
-comments: true
+title: "GemFire Installation on Mac"
+categories: [Architect, GemFire]
 ---
 
 When we're using GemFire on laptop, we need to install GemFire. I'm a Mac user, and will install using brew.

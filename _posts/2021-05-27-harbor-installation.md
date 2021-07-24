@@ -1,12 +1,11 @@
 ---
 layout: post
-title: Integrating SCG with HTTP Session Caching with Spring Data on TAS
-categories: [Architect, GemFire, SCG]
+title: Harbor Installation for Air-Gapped Environment
+categories: [TKG, Harbor]
 ---
 
 ## Environment
-- Used sample code [here](https://github.com/hshin-pivotal/ssdg-gemfire-demo){:target="_blank"}.
-- Spring Boot 2.3.1
+- Harbor: Spring Boot 2.3.1
 - VMWare Tanzu GemFire for VMs 1.12
 - Spring Cloud Gateway for VMware Tanzu 1.0.11
 - Running on TAS (Tanzu Application Service) 2.10.3
