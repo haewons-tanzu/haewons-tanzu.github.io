@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TKG Troubleshooting Guide
-categories: [TKG, Troubleshooting]
+categories: [tkg, troubleshooting]
 ---
 
 ## Environment

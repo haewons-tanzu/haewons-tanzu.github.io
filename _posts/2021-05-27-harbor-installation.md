@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Setting up Harbor for installing TKG on Air-Gapped Environment
-categories: [TKG, Harbor, Docker]
+categories: [tkg, harbor, docker]
 ---
 
 ## Environment

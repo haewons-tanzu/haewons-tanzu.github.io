@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TKG Installation on Azure Environment which doesn't support multi AZ
-categories: [TKG, Azure, Troubleshooting]
+categories: [tkg, azure, troubleshooting]
 ---
 
 ## Environment

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HTTP Session Caching with Spring Data on TAS
-categories: [Architect, GemFire]
+categories: [architect, gemfire]
 ---
 
 ## What is Tanzu GemFire & Apache Geode?
