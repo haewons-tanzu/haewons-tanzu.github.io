@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "GemFire Installation on Mac"
-categories: [architect, gemFire]
+categories: [architect, gemfire]
 ---
 
 When we're using GemFire on laptop, we need to install GemFire. I'm a Mac user, and will install using brew.
