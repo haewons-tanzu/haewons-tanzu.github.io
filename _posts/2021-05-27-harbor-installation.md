@@ -4,16 +4,15 @@ title: Setting up Harbor for installing TKG on Air-Gapped Environment
 categories: [TKG, Harbor, Docker]
 ---
 
-## Goal
-A private registry is required to install TKG in an air-gapped environment. This is written to use the Harbor as a
-private registry for installing TKG in an air-gapped environment.
-
 ## Environment
 - Docker: 20.10.2
 - Docmer Compose: 1.29.2
 - Harbor: Spring Boot 2.3.1
 - VMWare Tanzu Kubernetes Grid 1.3.1
 - OS: Ubuntu 18.04.5 LTS
+
+A private registry is required to install TKG in an air-gapped environment. This is written to use the Harbor as a
+private registry for installing TKG in an air-gapped environment.
 
 ## Preparation
 Before installing Harbor, we need to install Docker and Docker Compose.
