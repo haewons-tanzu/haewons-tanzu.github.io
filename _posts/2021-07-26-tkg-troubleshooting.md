@@ -14,6 +14,7 @@ While you're installing TKG, you may meet some error messages. This document is 
 Once you create management cluster with using CLI command "tanzu management-cluster create", tanzu CLI creates kind cluster in your machine which you executed it. During this process, you only see tanzu related log. However, it's creating kind cluster in your machine.
 Let's check the kind cluster log. You can check it in kind cluster or docker container.
 
+
 #### 1. Checking from the kind cluster
 You can check if there exists kind cluster with this command.
 ```shell
