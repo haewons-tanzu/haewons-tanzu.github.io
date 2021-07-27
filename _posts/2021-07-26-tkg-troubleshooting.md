@@ -7,7 +7,7 @@ categories: [tkg, troubleshooting]
 ## Environment
 - VMWare Tanzu Kubernetes Grid 1.3.1
 - Azure Cloud
-- kind cli 
+- kind cli 0.11.1
 
 While you're installing TKG, you may meet some error messages. This document is about how to troubleshoot when you meet such errors.
 
