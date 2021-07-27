@@ -67,3 +67,31 @@ $ kubectl --kubeconfig=/etc/kubernetes/admin.conf -n cert-manager describe po ce
 $ kubectl --kubeconfig=/etc/kubernetes/admin.conf -n capi-system logs capi-controller-manager-c4f5f9c76-sgg2h manager --tail 1000 –follow
 ```
 
+Now, let's start to troubleshoot for real!!
+I have already management cluster named "mgmt-cluster", and try to create TKC (Tanzu Kubernetes Cluster). I executed 
+tanzu 
+command as below.
+```shell
+$ tanzu cluster create -f tkc.yaml -v 9
+```
+Here, I'm gonna to connect to my management cluster named mgmt-cluster. There is my managent cluster context in ~/.
+kube/config and I can check the context info using the command as below. Default context name is 
+<MANAGEMENT-CLUSTER-NAME>-admin@<MANAGEMENT-CLUSTER-NAME>.
+```shell
+$ kubectl config view
+$ kubectl config get-contexts
+$ kubectl config use-contet mgmt-cluster-admin@mgmt-cluster
+```
+
+```shell
+$ kubectl get po -A
+```
+![tkg-troubleshooting 1](https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.
+io/master/static/img/_posts/2021-07-26-tkg-troubleshooting-1.png)
+```shell
+k -n capz-system logs capz-controller-manager-7f59fd4bf8-z5wjk manager --tail 1000 --follow
+```
+
+```text
+E0727 22:10:45.518001       1 controller.go:257] controller-runtime/controller "msg"="Reconciler error" "error"="failed to reconcile AzureMachine: failed to create virtual machine: failed to create VM tkc-1-control-plane-d2g6s in resource group tkc-1: compute.VirtualMachinesClient#CreateOrUpdate: Failure sending request: StatusCode=0 -- Original Error: autorest/azure: Service returned an error. Status=\u003cnil\u003e Code=\"OperationNotAllowed\" Message=\"Operation could not be completed as it results in exceeding approved standardDSv3Family Cores quota. Additional details - Deployment Model: Resource Manager, Location: KoreaCentral, Current Limit: 10, Current Usage: 8, Additional Required: 4, (Minimum) New Limit Required: 12. Submit a request for Quota increase at https://aka.ms/ProdportalCRP/?#create/Microsoft.Support/Parameters/%7B%22subId%22:%220b504234-3ba1-4543-b3da-640021e6ebab%22,%22pesId%22:%2206bfd9d3-516b-d5c6-5802-169c800dec89%22,%22supportTopicId%22:%22e12e3d1d-7fa0-af33-c6d0-3c50df9658a3%22%7D by specifying parameters listed in the ‘Details’ section for deployment to succeed. Please read more about quota limits at https://docs.microsoft.com/en-us/azure/azure-supportability/per-vm-quota-requests.\"" "controller"="azuremachine" "name"="tkc-1-control-plane-d2g6s" "namespace"="default"
+```
