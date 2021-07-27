@@ -12,8 +12,7 @@ categories: [tkg, troubleshooting]
 While you're installing TKG, you may meet some error messages. This document is about how to troubleshoot when you meet such errors.
 
 Once you create management cluster with using CLI command "tanzu management-cluster create", tanzu CLI creates kind cluster in your machine which you executed it. During this process, you only see tanzu related log. However, it's creating kind cluster in your machine.
-Let's check the kind cluster log. You can check it in kind cluster or docker container.
-
+Let's check the kind cluster log. You can check it in kind cluster or docker container.  
 
 #### 1. Checking from the kind cluster
 You can check if there exists kind cluster with this command.
@@ -44,7 +43,7 @@ pod/capi-kubeadm-control-plane-controller-manager-7f89b8594d-sp8hz manager --tai
 If you want to delete failed kind cluster while installing TKG, please execute this command as below.
 ```shell
 $ kind delete cluster --name=tkg-kind-c3r8evlr0ng9hjqthtp0
-```
+```  
 
 #### 2. Checking from the docker container
 You can check running docker process and its container id.
