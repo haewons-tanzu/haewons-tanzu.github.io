@@ -76,23 +76,34 @@ $ tanzu cluster create -f tkc.yaml -v 9
 Here, I'm gonna to connect to my management cluster named mgmt-cluster. There is my managent cluster context in ~/.kube/config and I can check the context info using the command as below. Default context name is <MANAGEMENT-CLUSTER-NAME>-admin@<MANAGEMENT-CLUSTER-NAME>.
 ```shell
 $ kubectl config view
+```
+or 
+```shell
 $ kubectl config get-contexts
+```
+Default context name is <MANAGEMENT-CLUSTER-NAME>-admin@<MANAGEMENT-CLUSTER-NAME>. Let's change this context to use it.
+```shell
 $ kubectl config use-contet mgmt-cluster-admin@mgmt-cluster
 ```
 
+Check all pods in this management cluster.
 ```shell
 $ kubectl get po -A
 ```
 
-Then you can see as below.
-![tkg-troubleshooting 1](https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.io/master/static/img/_posts/2021-07-26-tkg-troubleshooting-1.png)
+Then I can see as below.
+![tkg-troubleshooting 1](https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.io/master/static/img/_posts/2021-07-26-tkg-troubleshooting/1.png)
 
-You can see a pod named capz-controller-manager in capz-system namespace. This is the pod which shows logs during being executed APIs in Azure.
+I can see a pod named capz-controller-manager in capz-system namespace. This is the pod which shows logs during 
+being executed APIs in Azure.
 ```shell
 k -n capz-system logs capz-controller-manager-7f59fd4bf8-z5wjk manager --tail 1000 --follow
 ```
 
-
+I found this error during installing TKC. This error means that I don't have enough vCPU resource. It can be checked in Azure portal > Subscription > Usage + quotas. Azure has resource limit per region, and user has to request to increase limits. 
 ```text
 E0727 22:10:45.518001       1 controller.go:257] controller-runtime/controller "msg"="Reconciler error" "error"="failed to reconcile AzureMachine: failed to create virtual machine: failed to create VM tkc-1-control-plane-d2g6s in resource group tkc-1: compute.VirtualMachinesClient#CreateOrUpdate: Failure sending request: StatusCode=0 -- Original Error: autorest/azure: Service returned an error. Status=\u003cnil\u003e Code=\"OperationNotAllowed\" Message=\"Operation could not be completed as it results in exceeding approved standardDSv3Family Cores quota. Additional details - Deployment Model: Resource Manager, Location: KoreaCentral, Current Limit: 10, Current Usage: 8, Additional Required: 4, (Minimum) New Limit Required: 12. Submit a request for Quota increase at https://aka.ms/ProdportalCRP/?#create/Microsoft.Support/Parameters/%7B%22subId%22:%220b504234-3ba1-4543-b3da-640021e6ebab%22,%22pesId%22:%2206bfd9d3-516b-d5c6-5802-169c800dec89%22,%22supportTopicId%22:%22e12e3d1d-7fa0-af33-c6d0-3c50df9658a3%22%7D by specifying parameters listed in the ‘Details’ section for deployment to succeed. Please read more about quota limits at https://docs.microsoft.com/en-us/azure/azure-supportability/per-vm-quota-requests.\"" "controller"="azuremachine" "name"="tkc-1-control-plane-d2g6s" "namespace"="default"
 ```
+
+Now, my new TKC cluster was created!!
+![tkg-troubleshooting 2](https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.io/master/static/img/_posts/2021-07-26-tkg-troubleshooting/2.png)
