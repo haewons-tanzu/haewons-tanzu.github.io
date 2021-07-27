@@ -85,6 +85,7 @@ $ kubectl config use-contet mgmt-cluster-admin@mgmt-cluster
 ```shell
 $ kubectl get po -A
 ```
+
 ![tkg-troubleshooting 1](https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.
 io/master/static/img/_posts/2021-07-26-tkg-troubleshooting-1.png)
 ```shell
