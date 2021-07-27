@@ -20,7 +20,12 @@ I0517 17:48:12.269768 1 azuremachine_controller.go:227] controllers/AzureMachine
 ```
 Then, how could I resolve this issue?
 
-Go to ~/.tanzu/tkg/providers/infrastructure-azure/ytt and create this availability-set-workaround.yaml file.
+Execute the command to initialize .tanzu directory.
+```shell
+$ tanzu management-cluster create
+```
+
+And then, go to ~/.tanzu/tkg/providers/infrastructure-azure/ytt and create this availability-set-workaround.yaml file.
 
 ```yaml
 #@ load("@ytt:overlay", "overlay")
