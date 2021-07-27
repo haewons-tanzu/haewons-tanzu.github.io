@@ -68,12 +68,11 @@ $ kubectl --kubeconfig=/etc/kubernetes/admin.conf -n capi-system logs capi-contr
 ```
 
 Now, let's start to troubleshoot for real!!
-I have already management cluster named "mgmt-cluster", and try to create TKC (Tanzu Kubernetes Cluster). I executed 
-tanzu 
-command as below.
+I have already management cluster named "mgmt-cluster", and try to create TKC (Tanzu Kubernetes Cluster). I executed tanzu command as below.
 ```shell
 $ tanzu cluster create -f tkc.yaml -v 9
 ```
+
 Here, I'm gonna to connect to my management cluster named mgmt-cluster. There is my managent cluster context in ~/.
 kube/config and I can check the context info using the command as below. Default context name is 
 <MANAGEMENT-CLUSTER-NAME>-admin@<MANAGEMENT-CLUSTER-NAME>.
