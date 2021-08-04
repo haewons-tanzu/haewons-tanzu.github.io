@@ -73,7 +73,8 @@ I have already management cluster named mgmt-cluster, and try to create TKC (Tan
 $ tanzu cluster create -f tkc.yaml -v 9
 ```
 
-Here, I'm gonna to connect to my management cluster named mgmt-cluster. There is my managent cluster context in ~/.kube/config and I can check the context info using the command as below. Default context name is <MANAGEMENT-CLUSTER-NAME>-admin@<MANAGEMENT-CLUSTER-NAME>.
+Here, I'm gonna to connect to my management cluster named mgmt-cluster. There is my managent cluster context in ~/.
+kube/config and I can check the context info using the command as below. Default context name is \<MANAGEMENT-CLUSTER-NAME\>-admin@\<MANAGEMENT-CLUSTER-NAME\>.
 ```shell
 $ kubectl config view
 ```
@@ -81,7 +82,7 @@ or
 ```shell
 $ kubectl config get-contexts
 ```
-Default context name is <MANAGEMENT-CLUSTER-NAME>-admin@<MANAGEMENT-CLUSTER-NAME>. Let's change this context to use it.
+Default context name is \<MANAGEMENT-CLUSTER-NAME\>-admin@\<MANAGEMENT-CLUSTER-NAME\>. Let's change this context to use it.
 ```shell
 $ kubectl config use-contet mgmt-cluster-admin@mgmt-cluster
 ```
@@ -99,8 +100,8 @@ I can see a pod named capz-controller-manager in capz-system namespace. This is 
 $ kubectl -n capz-system logs capz-controller-manager-7f59fd4bf8-z5wjk manager --tail 1000 --follow
 ```
 
-**NOTE:** The name of pod and namespace depend on the IaaS environment. Their format of name is 
-<IAAS-ENVIRONMENT-PREFIX>-controller-manager pod in <IAAS-ENVIRONMENT-PREFIX>-system namespace and each IAAS-ENVIRONMENT-PREFIX is as below:
+**NOTE:** The name of pod and namespace depend on the IaaS environment. Their format of name is
+\<IAAS-ENVIRONMENT-PREFIX\>-controller-manager pod in \<IAAS-ENVIRONMENT-PREFIX\>-system namespace and each IAAS-ENVIRONMENT-PREFIX is as below:
 * vSphere: capv
 * Amazon EC2: capa
 * Azure: capz
