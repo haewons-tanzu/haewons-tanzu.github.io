@@ -99,10 +99,8 @@ I can see a pod named capz-controller-manager in capz-system namespace. This is 
 kubectl -n capz-system logs capz-controller-manager-7f59fd4bf8-z5wjk manager --tail 1000 --follow
 ```
 
-**NOTE:** The name of pod and namespace depend on the IaaS environment. Their format of name is 
+The name of pod and namespace depend on the IaaS environment. Their format of name is 
 <IAAS-ENVIRONMENT-PREFIX>-controller-manager pod in <IAAS-ENVIRONMENT-PREFIX>-system namespace and each IAAS-ENVIRONMENT-PREFIX is as below:
-
-
 * vSphere: capv
 * Amazon EC2: capa
 * Azure: capz
