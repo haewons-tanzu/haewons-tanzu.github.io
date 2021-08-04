@@ -96,15 +96,14 @@ Then I can see as below.
 
 I can see a pod named capz-controller-manager in capz-system namespace. This is the pod which shows logs during being executed APIs in Azure.
 ```shell
-kubectl -n capz-system logs capz-controller-manager-7f59fd4bf8-z5wjk manager --tail 1000 --follow
+$ kubectl -n capz-system logs capz-controller-manager-7f59fd4bf8-z5wjk manager --tail 1000 --follow
 ```
 
 **NOTE:** The name of pod and namespace depend on the IaaS environment. Their format of name is 
 <IAAS-ENVIRONMENT-PREFIX>-controller-manager pod in <IAAS-ENVIRONMENT-PREFIX>-system namespace and each IAAS-ENVIRONMENT-PREFIX is as below:
-
-vSphere: capv
-Amazon EC2: capa
-Azure: capz
+* vSphere: capv
+* Amazon EC2: capa
+* Azure: capz
 
 I found this error during installing TKC. This error means that I don't have enough vCPU resource. It can be checked in Azure portal > Subscription > Usage + quotas. Azure has resource limit per region, and user has to request to increase limits. I requested to increase quotas and re-run to create TKC.
 
