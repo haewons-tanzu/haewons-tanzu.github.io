@@ -8,7 +8,7 @@ categories: [troubleshooting, tap]
 Affected version: As of TAP 1.3.2 (Latest: TAP 1.4.0, not fixed)
 
 If you're a user who was [using TAP on multi cluster](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/multicluster-about.html) since the initial version(I belive the version is 1.1 :)), you'll be familiar with the supply chain in the screenshot as below. 
-![tap-supply-chian 1](https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.io/master/static/img/_posts/2023-01-25-tap-deliverables/1.png)
+[tap-supply-chian 1](https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.io/master/static/img/_posts/2023-01-25-tap-deliverables/1.png)
 
 However, unfortunately you may not see the Pull Config and Delivery box in the right side located in this supply chain. I found this sympton since TAP 1.3.2. Pull Config and Delivery is configured in run cluster with ["run" profile](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.4/tap/multicluster-reference-tap-values-run-sample.html).
 
@@ -44,7 +44,7 @@ spec:
 ```
 
 I created it on "run cluster" from copying it "build cluster" following the documentation. However, I could only see the screenshot as below, instead of the expected one.
-![tap-supply-chian 2](https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.io/master/static/img/_posts/2023-01-25-tap-deliverables/2.png)
+[tap-supply-chian 2](https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.io/master/static/img/_posts/2023-01-25-tap-deliverables/2.png)
 
 So, I started digging what configurations might have changed and found that the results of versions prior to TAP 1.3.2 were as follows.
 ```yaml
