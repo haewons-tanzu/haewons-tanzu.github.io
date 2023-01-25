@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TAP Webinar - An Efficient Way to Improve Your Kubernetes-Based App Development Productivity
-categories: [demo, tap]
+categories: [webinar, tap]
 ---
 
 As organisations rapidly embrace Kubernetes, developers are often left with an overwhelming landscape of incoherent tools that are tough to set up and work inconsistently across teams. Connecting them to other apps and infrastructure is extremely complex and forces developers to spend too much time grappling with underlying infrastructure vs. writing innovative code.
