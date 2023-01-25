@@ -18,7 +18,7 @@ $ kubectl get deliverable --namespace ${DEVELOPER_NAMESPACE}
 ```
 As of TAP 1.3.2, we do it with this command.
 ```bash
-$ kubectl get configmap tanzu-java-web-app --namespace ${DEVELOPER_NAMESPACE} -o go-template=' { {.data.deliverable } }'
+$ kubectl get configmap tanzu-java-web-app --namespace ${DEVELOPER_NAMESPACE} -o go-template=' { { .data.deliverable } } '
 ```
 According to the documentation, above 2 commands give the same result as below even they're different commands.
 ```yaml
