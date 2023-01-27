@@ -19,7 +19,8 @@ Error: Error getting accelerators from , connect ECONNREFUSED ::1:80
 ```
 
 And you can see the screenshot in app accelerator plugin.
-<img src="https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.io/master/static/img/_posts/2023-01-27-tap-accelerator-in-ide/1.png" width="200" alt="app-accelerator 1">
+
+<img src="https://raw.githubusercontent.com/haewons-tanzu/haewons-tanzu.github.io/master/static/img/_posts/2023-01-27-tap-accelerator-in-ide/1.png" width="300" alt="app-accelerator 1">
 
 This is because you misconfiured TAP GUI backend URL in Tanzu App Accelerator in extension setting.
 If you click the blue "Go to settings" button in the screenshot above, you can see 2 extensions list by searching "tanzu" included.
