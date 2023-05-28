@@ -35,8 +35,8 @@ urls:
       url: /about/
     - text: My Public Seminar
       url: /seminars/
-    #- text: My Projects
-    #  url: /projects/
+    - text: Tanzu 구성
+      url: /projects/
     - text: XML Feed
       url: /feed.xml
 
