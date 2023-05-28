@@ -36,6 +36,8 @@ urls:
     - text: My Public Seminar
       url: /seminars/
     - text: Tanzu 구성
+      url: /poc/
+    - text: My Projects
       url: /projects/
     - text: XML Feed
       url: /feed.xml
